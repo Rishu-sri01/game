@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Shivi ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff85a1;
+            --secondary-pink: #fbb1bd;
+            --dark-pink: #ff4d6d;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #fff0f3;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Envelope Styles */
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .envelope {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            background: var(--secondary-pink);
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .envelope::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            z-index: 2;
+            border-top: 110px solid var(--primary-pink);
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            transform-origin: top;
+            transition: all 0.5s ease;
+        }
+
+        .envelope.open::before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 160px;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+            z-index: 1;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        }
+
+        .envelope.open .letter {
+            bottom: 100px;
+            height: 200px;
+        }
+
+        /* Heart Rain */
+        .heart {
+            position: fixed;
+            color: var(--dark-pink);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 99;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content Transition */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .btn-love {
+            background: linear-gradient(45deg, var(--primary-pink), var(--dark-pink));
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-love:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.5);
+        }
+
+        #no-btn {
+            transition: all 0.2s ease;
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step 1: The Surprise Envelope -->
+    <div id="envelope-container" class="text-center">
+        <h2 class="text-3xl font-bold text-pink-600 mb-8 cursive">A special message for Shivi...</h2>
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="envelope" id="envelope">
+                <div class="letter">
+                    <p class="text-pink-500 font-bold">Tap to Open</p>
+                    <div class="mt-4 text-gray-700 italic text-sm">
+                        "In every heartbeat, I find a reason to love you more..."
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="mt-8 text-pink-400 animate-pulse italic">Click the heart of the envelope</p>
+    </div>
+
+    <!-- Step 2: Main Content -->
+    <div id="main-content" class="container mx-auto px-4 max-w-2xl py-12">
+        <div class="glass-card p-8 md:p-12 text-center relative overflow-hidden">
+            <!-- Decorative SVG Hearts -->
+            <div class="absolute -top-4 -left-4 w-24 h-24 text-pink-200 opacity-50">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+
+            <div class="floating mb-6">
+                <span class="text-6xl">💖</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold text-pink-600 mb-4 cursive">Happy Valentine's Day, Shivi!</h1>
+            <p class="text-lg text-gray-600 mb-8">Shivangi, you're the melody in my favorite song and the smile on my face every morning.</p>
+
+            <!-- The Big Question Area -->
+            <div id="interaction-container">
+                <div id="question-area" class="py-10 border-t border-pink-100">
+                    <h2 id="main-question" class="text-2xl font-bold text-pink-600 mb-10 cursive">Will you be my Valentine forever?</h2>
+                    <div class="flex justify-center items-center gap-8 min-h-[80px]">
+                        <button id="yes-btn" onclick="handleYes()" class="btn-love px-8 py-3 rounded-full text-white font-bold text-lg transition-all duration-300">
+                            YES! 🥰
+                        </button>
+                        <button id="no-btn" onclick="handleNo()" onmouseover="moveNoButton()" class="bg-gray-200 px-6 py-2 rounded-full text-gray-600 font-medium">
+                            No 😢
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div id="success-msg" class="hidden py-10">
+                <h2 class="text-4xl font-bold text-pink-600 cursive mb-4">I knew you'd say Yes! ❤️</h2>
+                <p class="text-gray-600 italic">"You are my today and all of my tomorrows."</p>
+                <div class="mt-6 flex justify-center gap-2">
+                    <span class="text-3xl">🌹</span>
+                    <span class="text-3xl">💍</span>
+                    <span class="text-3xl">🥂</span>
+                </div>
+                <!-- Memory Cards appear after Yes -->
+                <div class="grid grid-cols-1 gap-4 mt-10 text-left scale-up">
+                    <div class="bg-white/50 p-4 rounded-xl border-l-4 border-pink-500">
+                        <h3 class="font-bold text-pink-600">Why You're Special:</h3>
+                        <p class="text-sm text-gray-600">Your laugh is the most beautiful sound I've ever heard.</p>
+                    </div>
+                    <div class="bg-white/50 p-4 rounded-xl border-l-4 border-pink-400">
+                        <h3 class="font-bold text-pink-600">My Promise:</h3>
+                        <p class="text-sm text-gray-600">To always hold your hand, even when the road gets tough.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const noMessages = [
+            "Please say yes naa... I love you! ❤️",
+            "Shivi, please? 🥺",
+            "Don't do this to me! 😭",
+            "I'll give you chocolates! 🍫",
+            "Think again, my love! ✨",
+            "Pretty please with a cherry on top? 🍒"
+        ];
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        setInterval(createHeart, 300);
+
+        function openEnvelope() {
+            const env = document.getElementById('envelope');
+            const container = document.getElementById('envelope-container');
+            const main = document.getElementById('main-content');
+            env.classList.add('open');
+            setTimeout(() => {
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.style.display = 'none';
+                    main.style.display = 'block';
+                    setTimeout(() => main.style.opacity = '1', 50);
+                }, 1000);
+            }, 1000);
+        }
+
+        function moveNoButton() {
+            if (noClickCount < 1) return; // Only start jumping after first click/attempt
+            const btn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 40);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 40);
+            btn.style.position = 'fixed';
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function handleNo() {
+            noClickCount++;
+            const questionText = document.getElementById('main-question');
+            const yesBtn = document.getElementById('yes-btn');
+            
+            // Change the message
+            questionText.innerText = noMessages[noClickCount % noMessages.length];
+            questionText.classList.add('shake');
+            setTimeout(() => questionText.classList.remove('shake'), 500);
+
+            // Make Yes button bigger every time she says no
+            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            yesBtn.style.fontSize = (currentSize + 5) + 'px';
+            yesBtn.style.padding = '1rem 3rem';
+
+            // Start making the No button jump around
+            moveNoButton();
+        }
+
+        function handleYes() {
+            document.getElementById('interaction-container').classList.add('hidden');
+            document.getElementById('success-msg').classList.remove('hidden');
+            
+            // Reset "No" button position if it was floating
+            const noBtn = document.getElementById('no-btn');
+            noBtn.style.display = 'none';
+
+            for(let i=0; i<100; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+        }
+
+        // Mobile touch fix
+        document.getElementById('no-btn').addEventListener('touchstart', (e) => {
+            if (noClickCount > 0) {
+                e.preventDefault();
+                handleNo();
+            }
+        });
+    </script>
+</body>
+</html>
